@@ -1,0 +1,75 @@
+.contests-header {
+    margin-bottom: 60px;
+}
+
+.contests-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.contest-section h2 {
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+}
+
+.contest-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    transition: transform var(--transition-normal);
+}
+
+.contest-card.upcoming {
+    border-left: 4px solid var(--accent-blue);
+}
+
+.contest-card.past {
+    border-left: 4px solid var(--text-muted);
+    opacity: 0.8;
+}
+
+.contest-card:hover {
+    transform: translateX(8px);
+    opacity: 1;
+}
+
+.contest-info h3 {
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+}
+
+.contest-meta {
+    display: flex;
+    gap: 24px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.contest-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contest-detail-header {
+    padding: 32px;
+}
+
+.contest-detail-header h2 {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+}
+
+.contest-meta-large {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mx-auto { margin-inline: auto; }

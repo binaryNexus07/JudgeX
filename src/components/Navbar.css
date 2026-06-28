@@ -1,0 +1,70 @@
+.glass-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(10, 10, 26, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000;
+}
+
+
+.nav-fluid-container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 4vw;
+}
+
+.nav-container {
+    height: 100%;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-logo {
+    color: var(--accent-blue);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.nav-auth, .nav-user-menu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 16px;
+    padding-left: 32px;
+    border-left: 1px solid var(--glass-border);
+}
+
+.nav-profile-btn {
+    padding: 8px 16px;
+}
+
+.nav-logout-btn {
+    padding: 8px 12px;
+}

@@ -1,0 +1,119 @@
+.problems-header {
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.problems-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 4px;
+}
+
+.problems-filters {
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.search-bar {
+    position: relative;
+    width: 250px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.search-bar .glass-input {
+    padding-left: 40px;
+}
+
+.filter-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 0 12px;
+    height: 46px; /* Matches input height roughly */
+}
+
+.filter-dropdown svg {
+    color: var(--text-muted);
+    margin-right: 8px;
+}
+
+.glass-select {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 16px;
+}
+
+.glass-select option {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.problems-table-container {
+    overflow-x: auto;
+    padding: 8px 0;
+}
+
+.problem-title-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.problem-title-link:hover {
+    color: var(--accent-blue);
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.solve-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+}
+
+.status-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.unsolved-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--text-muted);
+}
+
+.solved-icon {
+    color: var(--status-success);
+}
+
+.no-results {
+    padding: 40px !important;
+    color: var(--text-muted) !important;
+}
+
+.problem-skeleton {
+    height: 60px;
+    margin-bottom: 12px;
+}
