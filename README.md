@@ -1,90 +1,73 @@
-# Bansal OJ — Minimalist React Online Judge
+# JudgeX Frontend
 
-Bansal OJ is a minimalist, responsive, light/dark themed React Single-Page Application (SPA) designed as an automated algorithmic evaluation platform. It aligns exactly with the design specifications of `online_judge_design.pdf`, focusing on Frontend Routing, Axios API service layers, and route authorizations.
+JudgeX is a premium, modern, and highly responsive online judge and competitive programming platform. This repository contains the standalone React frontend, designed with a stunning "Glassmorphism" UI, dynamic micro-animations, and real-time execution capabilities.
 
-To allow immediate, standalone operations without requiring a separate running database server, the application comes with a **Mock API Layer** that runs entirely client-side, intercepting standard Axios calls and simulating PostgreSQL state inside the browser's `localStorage`.
+## ✨ Features
 
----
+- **Modern Glassmorphism UI**: Beautifully crafted dark-mode interface with translucent glass panels, floating gradients, and seamless micro-animations.
+- **Real-Time Code Execution Console**: Integrated with `socket.io-client` to listen for asynchronous execution verdicts from the Judge Worker in real-time (Pending ➔ Compiling ➔ Running ➔ Accepted).
+- **Advanced Code Workspace**: Features side-by-side problem descriptions and a code editor with self-rectifying boilerplate generation based on the selected language.
+- **Admin & Sudo Dashboard**: A secure, restricted `/sudo` area for administrators to monitor live traffic, view CSS-based analytical charts, and seamlessly add new programming challenges.
+- **Fully Responsive**: Flawlessly adapts to any screen size, whether on an ultra-wide monitor, a split-screen view, or a mobile device.
 
-## 🎨 Theme & Appearance
-The platform is designed with a high-fidelity, highly minimal developer interface that supports **Light Mode** and **Dark Mode**:
-* **Light Mode (Ivory shade)**: Clean warm ivory background (`#FAF9F5`), white card containers, and dark typography.
-* **Dark Mode (Charcoal shade)**: Matte dark gray background (`#121212`), charcoal elevations (`#1E1E1E`), and soft white typography.
+## 🛠️ Tech Stack
 
----
-
-## 📂 Question Structure
-Every problem statement is displayed and created in the system matching the exact required schema:
-* **id of question**: Unique identifier (e.g. `Q1`)
-* **description**: Detailed challenge statement.
-* **constraints**: Run limits and value ranges.
-* **input**: Sample input representations.
-* **output**: Expected sample output values.
-
----
-
-## ⚡ Key Architectural Features
-
-### 1. In-Memory JWT & Split Token Refresh
-Adhering to security best practices outlined in the system design:
-* **Access Tokens** are kept strictly in JS memory (within `AuthContext.jsx` state) rather than `localStorage`, preventing XSS theft.
-* **Refresh Tokens** are sent via `httpOnly` secure cookies.
-* **Axios Interceptors (`src/api/client.js`)** automatically intercept outgoing requests. If a request returns `401 Unauthorized` due to token expiry, the interceptor pauses the queue, calls `POST /auth/refresh` to secure a new in-memory `accessToken`, and retries all original requests transparently.
-
-### 2. Client-Side Sandboxed Evaluation (JavaScript)
-For JavaScript submissions, the workspace does not just mock execution; it **actually evaluates** the user's code using sandboxed client-side `Function` loops. It runs their algorithm against sample test cases and validates whether it returns correct objects/arrays/values. Non-JavaScript languages (Python, C++) simulate compile progress and produce realistic status queues.
-
-### 3. PostgreSQL Local Database Simulation
-The mock layer (`src/api/mock.js`) seeds and maintains three main tables in `localStorage`:
-* **users**: Stores ID, email, password_hash, username, and role (`user` or `admin`).
-* **problems**: Stores problem definitions (id, title, slug, description, constraints, input, output, difficulty, tags).
-* **comments**: Stores comments with soft-delete flag (`is_deleted`). When deleted, comment bodies render as `[deleted]`.
-
----
-
-## 🛠️ API Routing Compatibility Map
-The frontend Axios client connects directly to standard URLs compatible with the target Express.js backend routers:
-
-| Method | Endpoint | Description | Guard / Auth |
-| :--- | :--- | :--- | :--- |
-| **POST** | `/api/auth/register` | Register new coder account | Public |
-| **POST** | `/api/auth/login` | Login and set refresh cookie | Public |
-| **POST** | `/api/auth/refresh` | Silent page-load token refresh | Public |
-| **POST** | `/api/auth/logout` | Clear session cookies | Public |
-| **GET** | `/api/problems` | List problems with search/filters/pages | Public |
-| **GET** | `/api/problems/:slug` | View details of a single question | Public |
-| **POST** | `/api/problems` | Add a new question (id, description, etc.) | Admin Only |
-| **PUT** | `/api/problems/:id` | Modify an existing question | Admin Only |
-| **DELETE** | `/api/problems/:id` | Remove a question from database | Admin Only |
-| **GET** | `/api/comments/:slug` | View discussion thread (soft deletes formatting) | Public |
-| **POST** | `/api/comments` | Post a new discussion comment | Authenticated |
-| **DELETE** | `/api/comments/:id` | Delete a comment (soft delete `is_deleted = true`) | Owner / Admin |
-
----
+- **Framework**: React 19 + Vite
+- **Routing**: React Router DOM (v7)
+- **Styling**: Vanilla CSS (Global Tokens, Flexbox/Grid, Glassmorphism, CSS Variables)
+- **Real-Time**: Socket.io Client (WebSocket)
+- **Icons**: Lucide React
+- **HTTP Client**: Axios
 
 ## 🚀 Getting Started
 
-### 1. Installation
-Install the necessary npm dependencies inside the project folder:
-```bash
-npm install
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. **Clone the repository** (if you haven't already):
+   ```bash
+   git clone https://github.com/YourUsername/JudgeX-Frontend.git
+   cd JudgeX-Frontend
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables**:
+   Create a `.env` file in the root directory (if connecting to a local backend):
+   ```env
+   VITE_API_URL=http://localhost:5000/api/v1
+   ```
+
+4. **Start the Development Server**:
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5173`.
+
+## 📁 Project Structure
+
+```text
+src/
+├── api/             # Axios client and API route definitions
+├── assets/          # Static assets like cinematic background videos and logos
+├── components/      # Reusable UI components (Navbar, ProtectedRoutes, etc.)
+├── context/         # React Contexts (AuthContext, SocketContext, ThemeContext)
+├── pages/           # Main application views (Home, Workspace, Admin, Contests, etc.)
+├── App.jsx          # Root component and Routing configuration
+├── index.css        # Global CSS variables, design tokens, and utility classes
+└── main.jsx         # Application entry point & Context Providers
 ```
 
-### 2. Running Locally
-Run the Vite development server:
-```bash
-npm run dev
-```
+## 🔌 Backend Integration
 
-### 3. Production Compilation
-Verify that all source code compiles cleanly without errors:
-```bash
-npm run build
-```
+This frontend is designed to strictly couple with the JudgeX Node.js/Express API Gateway. 
+- Standard requests (Authentication, Problem Fetching) are handled via **HTTPS/Axios**.
+- Code submissions are asynchronous; the frontend subscribes to **Socket.io events** emitted by the API Gateway to render live execution verdicts without polling.
 
 ---
-
-## 🔑 Quick Login Credentials (Mock Sandbox)
-For convenience during evaluation, the Login page includes shortcuts to bypass registration:
-1. **Admin Coder**: `sumitbansal1290@gmail.com` (Password: `admin123`) — *Grants access to the Admin panel to create/edit problems.*
-2. **Standard Coder**: `alice@example.com` (Password: `user123`) — *Grants standard comment and submit features.*
+*Built with precision for algorithmic excellence.*
